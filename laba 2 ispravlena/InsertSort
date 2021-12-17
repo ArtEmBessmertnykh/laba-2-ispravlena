@@ -1,0 +1,31 @@
+#include <iostream>
+#include <utility>
+using namespace std;
+
+int main()
+{
+    const int N = 100;
+    int unsort_arr[N];
+    for (int& x: unsort_arr) 
+        x = rand() % 199 - 99;
+
+    int sort_arr[N];
+    for (int i=0; i<N; i++)
+        sort_arr[i] = unsort_arr[i];
+    
+    for (int i=1; i<N; i++)
+    {
+        int tmp = sort_arr[i];
+        int k = i;
+        while (k>0 and sort_arr[k-1]>tmp)
+        {
+            sort_arr[k] = sort_arr[k-1];
+            k--;
+        }
+        sort_arr[k] = tmp;
+    }
+
+    for (int& x: sort_arr)
+        cout << x << ' ';
+    return 0;
+}
