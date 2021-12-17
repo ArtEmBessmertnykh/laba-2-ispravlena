@@ -1,0 +1,40 @@
+#include <iostream>
+#include <utility>
+using namespace std;
+
+int main()
+{
+    const int N = 100; 
+    int unsort_arr[N];
+    for (int& x : unsort_arr)
+        x = rand() % 199 - 99;//создается массив -99 до 99
+
+    int sort_arr[N];
+    for (int i = 0; i < N; i++)
+        sort_arr[i] = unsort_arr[i];
+
+    bool flag = true;
+    int begin = 0, end = N - 1;
+    while (flag)
+    {
+        flag = false;
+        for (int i = begin; i < end; i++)
+            if (sort_arr[i] > sort_arr[i + 1]) //сортировка идет слева направо 
+            {
+                std::swap(sort_arr[i], sort_arr[i + 1]);
+                flag = true;
+            }
+        end--;
+        for (int k = end; k > begin; k--)
+            if (sort_arr[k] < sort_arr[k - 1]) // сортировка идет справа налево
+            {
+                std::swap(sort_arr[k], sort_arr[k - 1]);
+                flag = true;
+            }
+        begin++;
+    }
+
+
+    for (int x : sort_arr)
+        cout << x << ' ';
+    return 0;
